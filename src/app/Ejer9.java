@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 
 public class Ejer9 {
-    Alumno alumno;
 
     public static void altaAlumnos(File f, List<Alumno> lista) {
         try (FileOutputStream fos = new FileOutputStream(f, false); DataOutputStream out = new DataOutputStream(fos)) {
@@ -81,10 +80,10 @@ public class Ejer9 {
     public static void modificarAlumno(List<Alumno> lista, File f, int codigo, int codigoNuevo, String nombreNuevo, int fechaNacNueva) {
         int i = 0;
         boolean append = false;
+        boolean codInvalido = false;
         int codigoLeido;
         boolean existe = false;
         File fichActualizado = new File(f.getAbsolutePath().replace(f.getName(), "alumnosModificado.dat"));
-    
 
         int indiceLista = indiceLista(lista, codigo); 
         if(indiceLista != -1){
@@ -93,7 +92,11 @@ public class Ejer9 {
             lista.get(indiceLista).setFechaNacimiento(fechaNacNueva);            
         }  
 
-        if(!codExistsFichero(f, codigoNuevo)){
+        if(codigo != codigoNuevo){
+            codInvalido = codExistsFichero(f, codigoNuevo);
+        }
+
+        if(!codInvalido){
             try (FileInputStream fis = new FileInputStream(f); DataInputStream in = new DataInputStream(fis)) { //leemos do orixinal
                 while (true) {      //mentres haxa algo que ler...
                     if (i > 0) {
@@ -129,7 +132,6 @@ public class Ejer9 {
         }else{
             System.out.println("Error: ya existe un alumno con el código "+codigoNuevo+"\n");
         }
-        
     }
 
     public static void borrarAlumno(List<Alumno> lista, File f, int codigo){
@@ -184,7 +186,6 @@ public class Ejer9 {
         return ind;         //devolve -1 se o codigo non existe
     }
 
-
     public static boolean codExistsFichero(File f, int cod){
         try (FileInputStream fis = new FileInputStream(f); DataInputStream in = new DataInputStream(fis)){
             while(true){
@@ -203,5 +204,4 @@ public class Ejer9 {
         }
         return false;
     }
-
 }

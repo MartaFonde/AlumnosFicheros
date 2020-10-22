@@ -27,7 +27,7 @@ public class App {
         Ejer9.consultarTodosAlumnos(f);
 
         System.out.println("\n---- MODIFICA ----");
-        Ejer9.modificarAlumno(lista, f, 2, 5, "JPSartre", 21061905);
+        Ejer9.modificarAlumno(lista, f, 2, 2, "JPSartre", 21061905);
         Ejer9.consultarTodosAlumnos(f);
 
         System.out.println("\n***** BORRA *****");
