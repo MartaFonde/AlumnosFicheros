@@ -17,11 +17,7 @@ public class Ejer9 {
         }
     }
 
-    public static void altaNuevoAlumno(List<Alumno> lista, File f, int codigo, String nombre, int fecha){
-        if(indiceLista(lista, codigo) == -1){
-            Alumno alumno = new Alumno(codigo, nombre, fecha);
-            lista.add(alumno);
-        }
+    public static void altaNuevoAlumno(File f, int codigo, String nombre, int fecha){
 
         if(!codExistsFichero(f, codigo)){
             try (FileOutputStream fos = new FileOutputStream(f, true); DataOutputStream out = new DataOutputStream(fos)) {
@@ -49,7 +45,7 @@ public class Ejer9 {
         }
     }
 
-    public static void consultarUnAlumno(List<Alumno> lista, File f, int codigo){  
+    public static void consultarUnAlumno(File f, int codigo){  
             int codLeido;
             boolean existe = false;
 
@@ -77,20 +73,13 @@ public class Ejer9 {
         }
     }
 
-    public static void modificarAlumno(List<Alumno> lista, File f, int codigo, int codigoNuevo, String nombreNuevo, int fechaNacNueva) {
+    public static void modificarAlumno(File f, int codigo, int codigoNuevo, String nombreNuevo, int fechaNacNueva) {
         int i = 0;
         boolean append = false;
         boolean codInvalido = false;
         int codigoLeido;
         boolean existe = false;
         File fichActualizado = new File(f.getAbsolutePath().replace(f.getName(), "alumnosModificado.dat"));
-
-        int indiceLista = indiceLista(lista, codigo); 
-        if(indiceLista != -1){
-            lista.get(indiceLista).setCodigo(codigoNuevo);     
-            lista.get(indiceLista).setNombre(nombreNuevo);
-            lista.get(indiceLista).setFechaNacimiento(fechaNacNueva);            
-        }  
 
         if(codigo != codigoNuevo){
             codInvalido = codExistsFichero(f, codigoNuevo);
@@ -134,16 +123,11 @@ public class Ejer9 {
         }
     }
 
-    public static void borrarAlumno(List<Alumno> lista, File f, int codigo){
+    public static void borrarAlumno(File f, int codigo){
         int codigoLeido;
         boolean append = false;
         int i = 0;
         File fichActualizado = new File(f.getAbsolutePath().replace(f.getName(), "alumnosBorrado.dat"));
-
-        int indiceLista = indiceLista(lista, codigo);
-        if(indiceLista != -1){
-            lista.remove(indiceLista);
-        }
 
         if(codExistsFichero(f, codigo)){
             try (FileInputStream fis = new FileInputStream(f); DataInputStream in = new DataInputStream(fis)) {
@@ -174,16 +158,6 @@ public class Ejer9 {
         }else{
             System.out.println("Error: el código no se corresponde con ningún alumno");
         }
-    }
-
-    public static int indiceLista(List<Alumno> lista, int codigo){
-        int ind = -1;
-        for(int i = 0; i < lista.size(); i++){
-            if(lista.get(i).getCodigo() == codigo){
-                ind = i;
-            }
-        }
-        return ind;         //devolve -1 se o codigo non existe
     }
 
     public static boolean codExistsFichero(File f, int cod){

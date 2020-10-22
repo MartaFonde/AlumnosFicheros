@@ -19,19 +19,20 @@ public class App {
         Ejer9.consultarTodosAlumnos(f);
 
         System.out.println("\n///// CONSULTAR UN ALUMNO /////");
-        Ejer9.consultarUnAlumno(lista, f, 1);
-        Ejer9.consultarUnAlumno(lista, f, 17);
+        Ejer9.consultarUnAlumno(f, 1);
+        Ejer9.consultarUnAlumno(f, 17);
 
         System.out.println("\n++++ ALTA ALUMNO ++++");
-        Ejer9.altaNuevoAlumno(lista, f, 10, "Slavoj Zizek", 21031949);
+        Ejer9.altaNuevoAlumno(f, 10, "Slavoj Zizek", 21031949);
         Ejer9.consultarTodosAlumnos(f);
 
         System.out.println("\n---- MODIFICA ----");
-        Ejer9.modificarAlumno(lista, f, 2, 2, "JPSartre", 21061905);
+        Ejer9.modificarAlumno(f, 2, 2, "JPSartre", 21061905);
+        Ejer9.modificarAlumno(f, 2, 3, "JPSartre", 21061905);
         Ejer9.consultarTodosAlumnos(f);
 
         System.out.println("\n***** BORRA *****");
-        Ejer9.borrarAlumno(lista, f, 3);
+        Ejer9.borrarAlumno(f, 3);
         Ejer9.consultarTodosAlumnos(f);
     }
 }
